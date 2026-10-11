@@ -14,6 +14,8 @@ from pathlib import Path
 import anthropic
 
 from .checks import all_passed, run_checks
+from .eval import EvalError, run_eval
+from .settings import ROOT
 from .claude_client import ClaudeClient
 from .facts import PlaybookError, ReportError, applicable_playbook, build_fact_sheet, load_playbook, load_report
 from .fallback import build_fallback
@@ -36,8 +38,10 @@ def main(argv=None):
     args = _parser().parse_args(argv)
     try:
         settings = load_settings(args.config)
+        if args.command == "eval":
+            return _eval(args, settings)
         return _draft(args.report, settings)
-    except (SettingsError, ReportError, PlaybookError) as error:
+    except (SettingsError, ReportError, PlaybookError, EvalError) as error:
         print(f"ai-triage: error: {error}", file=sys.stderr)
         return 3
 
@@ -48,7 +52,22 @@ def _parser():
     commands = parser.add_subparsers(dest="command", required=True)
     draft = commands.add_parser("draft", help="write a checked triage note next to report.json")
     draft.add_argument("report", help="manifest-doctor report folder (or its report.json)")
+    evaluate = commands.add_parser("eval", help="run the harness: every case, several times, all answers checked")
+    evaluate.add_argument("--cases", default=str(ROOT / "cases"))
+    evaluate.add_argument("--runs", default=str(ROOT / "runs"), help="where results are recorded")
+    evaluate.add_argument("--repeats", type=int, default=3)
+    evaluate.add_argument("--dry-run", action="store_true", help="free: use the code-written fallback, no AI")
+    evaluate.add_argument("--max-cost", type=float, default=None, help="per-run limit in USD (default from settings)")
     return parser
+
+
+def _eval(args, settings):
+    sdk = None
+    if not args.dry_run and os.environ.get("ANTHROPIC_API_KEY", "").strip():
+        sdk = make_sdk_client(settings)
+    summary = run_eval(args.cases, settings, repeats=args.repeats, sdk_client=sdk, dry_run=args.dry_run,
+                       max_cost_usd=args.max_cost, runs_dir=args.runs)
+    return 0 if summary.pass_rate == 1.0 else 1
 
 
 def _draft(report_path, settings):

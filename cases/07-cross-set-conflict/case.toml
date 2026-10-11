@@ -1,0 +1,2 @@
+title = "cross-set-conflict"
+purpose = "Two manifests disagree about one file. The note must not pick a winner."

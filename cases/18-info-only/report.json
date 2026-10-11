@@ -1,0 +1,88 @@
+{
+  "header": {
+    "tool": "manifest-doctor",
+    "version": "0.1.0",
+    "run_at": "2026-10-11T13:25:46+01:00",
+    "tree": "D:/Incoming/info-only",
+    "result": "CLEAN",
+    "exit_code": 0,
+    "counts": {
+      "ERROR": 0,
+      "WARNING": 0,
+      "INFO": 2
+    },
+    "settings": {
+      "algorithm": {
+        "value": "md5",
+        "source": "default"
+      },
+      "prefix_mode": {
+        "value": "suggest",
+        "source": "default"
+      },
+      "name_rules": {
+        "value": "windows",
+        "source": "default"
+      },
+      "hash_extras": {
+        "value": false,
+        "source": "default"
+      },
+      "fail_on": {
+        "value": "error",
+        "source": "default"
+      },
+      "severity": {
+        "value": {},
+        "source": "default"
+      }
+    },
+    "manifests": [
+      {
+        "path": "set1.md5",
+        "format": "md5sum",
+        "entries": 5,
+        "stripped_prefix": null
+      }
+    ],
+    "cross_set": null
+  },
+  "causes": [
+    {
+      "code": "CAUSE_HIDDEN_NOISE",
+      "severity": "INFO",
+      "summary": "2 system files were set aside (they would otherwise have counted as extra files). Files like these are created automatically by macOS and Windows.",
+      "paths": [
+        "ShowA/.DS_Store",
+        "ShowA/Thumbs.db"
+      ],
+      "note": "Probable cause, not a verdict."
+    }
+  ],
+  "findings": [
+    {
+      "code": "HIDDEN_FILE",
+      "severity": "INFO",
+      "path": "ShowA/.DS_Store",
+      "detail": "system file set aside",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "HIDDEN_FILE",
+      "severity": "INFO",
+      "path": "ShowA/Thumbs.db",
+      "detail": "system file set aside",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    }
+  ]
+}

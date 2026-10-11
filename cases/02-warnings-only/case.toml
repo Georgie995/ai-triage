@@ -1,0 +1,2 @@
+title = "warnings-only"
+purpose = "One extra file only: PASSED WITH WARNINGS, no errors invented."

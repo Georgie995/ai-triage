@@ -1,0 +1,2 @@
+title = "hash-mismatch"
+purpose = "A file changed after the manifest was made."

@@ -1,0 +1,87 @@
+{
+  "header": {
+    "tool": "manifest-doctor",
+    "version": "0.1.0",
+    "run_at": "2026-10-11T13:25:44+01:00",
+    "tree": "D:/Incoming/duplicate-listing",
+    "result": "PROBLEMS FOUND",
+    "exit_code": 1,
+    "counts": {
+      "ERROR": 2,
+      "WARNING": 0,
+      "INFO": 0
+    },
+    "settings": {
+      "algorithm": {
+        "value": "md5",
+        "source": "default"
+      },
+      "prefix_mode": {
+        "value": "suggest",
+        "source": "default"
+      },
+      "name_rules": {
+        "value": "windows",
+        "source": "default"
+      },
+      "hash_extras": {
+        "value": false,
+        "source": "default"
+      },
+      "fail_on": {
+        "value": "error",
+        "source": "default"
+      },
+      "severity": {
+        "value": {},
+        "source": "default"
+      }
+    },
+    "manifests": [
+      {
+        "path": "set1.md5",
+        "format": "md5sum",
+        "entries": 6,
+        "stripped_prefix": null
+      }
+    ],
+    "cross_set": null
+  },
+  "causes": [
+    {
+      "code": "CAUSE_DUPLICATE_LISTING",
+      "severity": "ERROR",
+      "summary": "1 path is listed more than once in a manifest with different checksums. Only one version can exist at a path, so verification against the other entry will fail. Check which version was intended.",
+      "paths": [
+        "ShowA/Reel01/clip_0004.mov"
+      ],
+      "note": "Probable cause, not a verdict."
+    }
+  ],
+  "findings": [
+    {
+      "code": "DUPLICATE_ENTRY",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0004.mov",
+      "detail": "line 4 has 94076178cf017507a702a31560062f38, line 6 has d4ca1ed7571e2e7b1f1c375bd50fa220",
+      "manifest": "set1.md5",
+      "line": 6,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "HASH_MISMATCH",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0004.mov",
+      "detail": "the file matches line 6, not line 4",
+      "manifest": "set1.md5",
+      "line": 4,
+      "expected_hash": "94076178cf017507a702a31560062f38",
+      "actual_hash": "d4ca1ed7571e2e7b1f1c375bd50fa220",
+      "size": 9,
+      "proposed_name": null
+    }
+  ]
+}

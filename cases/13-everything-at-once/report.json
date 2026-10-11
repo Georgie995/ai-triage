@@ -1,0 +1,234 @@
+{
+  "header": {
+    "tool": "manifest-doctor",
+    "version": "0.1.0",
+    "run_at": "2026-10-11T13:25:46+01:00",
+    "tree": "D:/Incoming/everything-at-once",
+    "result": "PROBLEMS FOUND",
+    "exit_code": 1,
+    "counts": {
+      "ERROR": 6,
+      "WARNING": 5,
+      "INFO": 1
+    },
+    "settings": {
+      "algorithm": {
+        "value": "md5",
+        "source": "default"
+      },
+      "prefix_mode": {
+        "value": "suggest",
+        "source": "default"
+      },
+      "name_rules": {
+        "value": "windows",
+        "source": "default"
+      },
+      "hash_extras": {
+        "value": false,
+        "source": "default"
+      },
+      "fail_on": {
+        "value": "error",
+        "source": "default"
+      },
+      "severity": {
+        "value": {},
+        "source": "default"
+      }
+    },
+    "manifests": [
+      {
+        "path": "set1.md5",
+        "format": "md5sum",
+        "entries": 9,
+        "stripped_prefix": null
+      }
+    ],
+    "cross_set": null
+  },
+  "causes": [
+    {
+      "code": "CAUSE_DUPLICATE_LISTING",
+      "severity": "ERROR",
+      "summary": "1 path is listed more than once in a manifest with different checksums. Only one version can exist at a path, so verification against the other entry will fail. Check which version was intended.",
+      "paths": [
+        "ShowA/Reel01/clip_0004.mov"
+      ],
+      "note": "Probable cause, not a verdict."
+    },
+    {
+      "code": "CAUSE_UNICODE_FORM",
+      "severity": "WARNING",
+      "summary": "1 file name differs from the manifest only in how accented letters are stored (one character, or a letter plus a separate accent mark). This typically happens when names made on macOS meet names made on Windows or Linux.",
+      "paths": [
+        "ShowA/Audio/Café_stem.wav"
+      ],
+      "note": "Probable cause, not a verdict."
+    },
+    {
+      "code": "CAUSE_CASE_ONLY",
+      "severity": "WARNING",
+      "summary": "1 file name differs from the manifest only in upper/lower case. Windows and most macOS drives treat these as the same name; case-sensitive storage (such as Linux or cloud object storage) treats them as different files.",
+      "paths": [
+        "ShowA/Audio/Dialogue_Stem.wav"
+      ],
+      "note": "Probable cause, not a verdict."
+    },
+    {
+      "code": "CAUSE_HIDDEN_NOISE",
+      "severity": "INFO",
+      "summary": "1 system file was set aside (it would otherwise have counted as an extra file). Files like these are created automatically by macOS and Windows.",
+      "paths": [
+        "ShowA/Reel01/.DS_Store"
+      ],
+      "note": "Probable cause, not a verdict."
+    }
+  ],
+  "findings": [
+    {
+      "code": "DUPLICATE_ENTRY",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0004.mov",
+      "detail": "line 4 has 6654c734ccab8f440ff0825eb443dc7f, line 5 has 1b267619c4812cc46ee281747884ca50",
+      "manifest": "set1.md5",
+      "line": 5,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "HASH_MISMATCH",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0002.mov",
+      "detail": "checksum differs from the manifest",
+      "manifest": "set1.md5",
+      "line": 2,
+      "expected_hash": "025f253325b46929cd34f2a7c3c55e7c",
+      "actual_hash": "8977dfac2f8e04cb96e66882235f5aba",
+      "size": 7,
+      "proposed_name": null
+    },
+    {
+      "code": "HASH_MISMATCH",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0004.mov",
+      "detail": "the file matches line 5, not line 4",
+      "manifest": "set1.md5",
+      "line": 4,
+      "expected_hash": "6654c734ccab8f440ff0825eb443dc7f",
+      "actual_hash": "1b267619c4812cc46ee281747884ca50",
+      "size": 2,
+      "proposed_name": null
+    },
+    {
+      "code": "MANIFEST_LINE_UNREADABLE",
+      "severity": "ERROR",
+      "path": null,
+      "detail": "could not understand line: '### damaged line ###'",
+      "manifest": "set1.md5",
+      "line": 10,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "MISSING",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0005.mov",
+      "detail": "listed in the manifest but not found on disk",
+      "manifest": "set1.md5",
+      "line": 6,
+      "expected_hash": "c7561db7a418dd39b2201dfe110ab4a4",
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "ZERO_BYTE",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0003.mov",
+      "detail": "file is 0 bytes; the manifest checksum is also that of an empty file, so it was probably already empty when the manifest was made",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": 0,
+      "proposed_name": null
+    },
+    {
+      "code": "CASE_ONLY_MATCH",
+      "severity": "WARNING",
+      "path": "ShowA/Audio/Dialogue_Stem.wav",
+      "detail": "manifest has 'ShowA/Audio/dialogue_stem.wav', disk has 'ShowA/Audio/Dialogue_Stem.wav' (differs only in upper/lower case)",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "EXTRA",
+      "severity": "WARNING",
+      "path": "ShowA/Reel01/clip_0006  copy.mov",
+      "detail": "on disk but not listed in any manifest",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": 5,
+      "proposed_name": null
+    },
+    {
+      "code": "NAME_HYGIENE",
+      "severity": "WARNING",
+      "path": "ShowA/Docs/ notes.txt",
+      "detail": "starts with a space",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": "notes.txt"
+    },
+    {
+      "code": "NAME_HYGIENE",
+      "severity": "WARNING",
+      "path": "ShowA/Reel01/clip_0006  copy.mov",
+      "detail": "contains double spaces",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": "clip_0006 copy.mov"
+    },
+    {
+      "code": "UNICODE_ONLY_MATCH",
+      "severity": "WARNING",
+      "path": "ShowA/Audio/Café_stem.wav",
+      "detail": "the manifest writes é as one character; the disk writes it as a letter plus a separate accent mark (typical of macOS). The names look identical but are stored differently.",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "HIDDEN_FILE",
+      "severity": "INFO",
+      "path": "ShowA/Reel01/.DS_Store",
+      "detail": "system file set aside",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    }
+  ]
+}

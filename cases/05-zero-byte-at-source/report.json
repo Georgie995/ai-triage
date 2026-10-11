@@ -1,0 +1,65 @@
+{
+  "header": {
+    "tool": "manifest-doctor",
+    "version": "0.1.0",
+    "run_at": "2026-10-11T13:25:44+01:00",
+    "tree": "D:/Incoming/zero-byte-at-source",
+    "result": "PROBLEMS FOUND",
+    "exit_code": 1,
+    "counts": {
+      "ERROR": 1,
+      "WARNING": 0,
+      "INFO": 0
+    },
+    "settings": {
+      "algorithm": {
+        "value": "md5",
+        "source": "default"
+      },
+      "prefix_mode": {
+        "value": "suggest",
+        "source": "default"
+      },
+      "name_rules": {
+        "value": "windows",
+        "source": "default"
+      },
+      "hash_extras": {
+        "value": false,
+        "source": "default"
+      },
+      "fail_on": {
+        "value": "error",
+        "source": "default"
+      },
+      "severity": {
+        "value": {},
+        "source": "default"
+      }
+    },
+    "manifests": [
+      {
+        "path": "set1.md5",
+        "format": "md5sum",
+        "entries": 5,
+        "stripped_prefix": null
+      }
+    ],
+    "cross_set": null
+  },
+  "causes": [],
+  "findings": [
+    {
+      "code": "ZERO_BYTE",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0003.mov",
+      "detail": "file is 0 bytes; the manifest checksum is also that of an empty file, so it was probably already empty when the manifest was made",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": 0,
+      "proposed_name": null
+    }
+  ]
+}

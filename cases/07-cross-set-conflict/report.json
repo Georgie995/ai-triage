@@ -1,0 +1,87 @@
+{
+  "header": {
+    "tool": "manifest-doctor",
+    "version": "0.1.0",
+    "run_at": "2026-10-11T13:25:45+01:00",
+    "tree": "D:/Incoming/cross-set-conflict",
+    "result": "PROBLEMS FOUND",
+    "exit_code": 1,
+    "counts": {
+      "ERROR": 2,
+      "WARNING": 0,
+      "INFO": 0
+    },
+    "settings": {
+      "algorithm": {
+        "value": "md5",
+        "source": "default"
+      },
+      "prefix_mode": {
+        "value": "suggest",
+        "source": "default"
+      },
+      "name_rules": {
+        "value": "windows",
+        "source": "default"
+      },
+      "hash_extras": {
+        "value": false,
+        "source": "default"
+      },
+      "fail_on": {
+        "value": "error",
+        "source": "default"
+      },
+      "severity": {
+        "value": {},
+        "source": "default"
+      }
+    },
+    "manifests": [
+      {
+        "path": "set1.md5",
+        "format": "md5sum",
+        "entries": 5,
+        "stripped_prefix": null
+      },
+      {
+        "path": "set2.md5",
+        "format": "md5sum",
+        "entries": 1,
+        "stripped_prefix": null
+      }
+    ],
+    "cross_set": {
+      "identical": 0,
+      "conflicting": 1,
+      "unique": 4
+    }
+  },
+  "causes": [],
+  "findings": [
+    {
+      "code": "CROSS_SET_CONFLICT",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0001.mov",
+      "detail": "different checksums in different sets (set1.md5: 99c7c144b997cc7cfbef465a4365a4be; set2.md5: e8944d9c9afbc84051d4f41de080e74e). This is a finding, not a verdict: the tool cannot tell which version is correct or when they diverged.",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "HASH_MISMATCH",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0001.mov",
+      "detail": "the file matches line 1 of set1.md5, not line 1",
+      "manifest": "set2.md5",
+      "line": 1,
+      "expected_hash": "e8944d9c9afbc84051d4f41de080e74e",
+      "actual_hash": "99c7c144b997cc7cfbef465a4365a4be",
+      "size": 9,
+      "proposed_name": null
+    }
+  ]
+}

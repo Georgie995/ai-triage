@@ -1,0 +1,2 @@
+title = "zero-byte-at-source"
+purpose = "An empty file whose manifest checksum is also the empty checksum."

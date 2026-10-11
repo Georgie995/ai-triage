@@ -1,0 +1,99 @@
+{
+  "header": {
+    "tool": "manifest-doctor",
+    "version": "0.1.0",
+    "run_at": "2026-10-11T13:25:46+01:00",
+    "tree": "D:/Incoming/name-hygiene-and-case",
+    "result": "PASSED WITH WARNINGS",
+    "exit_code": 0,
+    "counts": {
+      "ERROR": 0,
+      "WARNING": 3,
+      "INFO": 0
+    },
+    "settings": {
+      "algorithm": {
+        "value": "md5",
+        "source": "default"
+      },
+      "prefix_mode": {
+        "value": "suggest",
+        "source": "default"
+      },
+      "name_rules": {
+        "value": "windows",
+        "source": "default"
+      },
+      "hash_extras": {
+        "value": false,
+        "source": "default"
+      },
+      "fail_on": {
+        "value": "error",
+        "source": "default"
+      },
+      "severity": {
+        "value": {},
+        "source": "default"
+      }
+    },
+    "manifests": [
+      {
+        "path": "set1.md5",
+        "format": "md5sum",
+        "entries": 3,
+        "stripped_prefix": null
+      }
+    ],
+    "cross_set": null
+  },
+  "causes": [
+    {
+      "code": "CAUSE_CASE_ONLY",
+      "severity": "WARNING",
+      "summary": "1 file name differs from the manifest only in upper/lower case. Windows and most macOS drives treat these as the same name; case-sensitive storage (such as Linux or cloud object storage) treats them as different files.",
+      "paths": [
+        "ShowA/README.TXT"
+      ],
+      "note": "Probable cause, not a verdict."
+    }
+  ],
+  "findings": [
+    {
+      "code": "CASE_ONLY_MATCH",
+      "severity": "WARNING",
+      "path": "ShowA/README.TXT",
+      "detail": "manifest has 'ShowA/readme.txt', disk has 'ShowA/README.TXT' (differs only in upper/lower case)",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    },
+    {
+      "code": "NAME_HYGIENE",
+      "severity": "WARNING",
+      "path": "ShowA/ notes.txt",
+      "detail": "starts with a space",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": "notes.txt"
+    },
+    {
+      "code": "NAME_HYGIENE",
+      "severity": "WARNING",
+      "path": "ShowA/clip  01.mov",
+      "detail": "contains double spaces",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": "clip 01.mov"
+    }
+  ]
+}

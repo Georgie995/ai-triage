@@ -1,0 +1,65 @@
+{
+  "header": {
+    "tool": "manifest-doctor",
+    "version": "0.1.0",
+    "run_at": "2026-10-11T13:25:44+01:00",
+    "tree": "D:/Incoming/one-missing",
+    "result": "PROBLEMS FOUND",
+    "exit_code": 1,
+    "counts": {
+      "ERROR": 1,
+      "WARNING": 0,
+      "INFO": 0
+    },
+    "settings": {
+      "algorithm": {
+        "value": "md5",
+        "source": "default"
+      },
+      "prefix_mode": {
+        "value": "suggest",
+        "source": "default"
+      },
+      "name_rules": {
+        "value": "windows",
+        "source": "default"
+      },
+      "hash_extras": {
+        "value": false,
+        "source": "default"
+      },
+      "fail_on": {
+        "value": "error",
+        "source": "default"
+      },
+      "severity": {
+        "value": {},
+        "source": "default"
+      }
+    },
+    "manifests": [
+      {
+        "path": "set1.md5",
+        "format": "md5sum",
+        "entries": 5,
+        "stripped_prefix": null
+      }
+    ],
+    "cross_set": null
+  },
+  "causes": [],
+  "findings": [
+    {
+      "code": "MISSING",
+      "severity": "ERROR",
+      "path": "ShowA/Reel01/clip_0005.mov",
+      "detail": "listed in the manifest but not found on disk",
+      "manifest": "set1.md5",
+      "line": 5,
+      "expected_hash": "9f79746a9c46281d5922c8cdcddab005",
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    }
+  ]
+}

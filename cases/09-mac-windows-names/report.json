@@ -1,0 +1,75 @@
+{
+  "header": {
+    "tool": "manifest-doctor",
+    "version": "0.1.0",
+    "run_at": "2026-10-11T13:25:46+01:00",
+    "tree": "D:/Incoming/mac-windows-names",
+    "result": "PASSED WITH WARNINGS",
+    "exit_code": 0,
+    "counts": {
+      "ERROR": 0,
+      "WARNING": 1,
+      "INFO": 0
+    },
+    "settings": {
+      "algorithm": {
+        "value": "md5",
+        "source": "default"
+      },
+      "prefix_mode": {
+        "value": "suggest",
+        "source": "default"
+      },
+      "name_rules": {
+        "value": "windows",
+        "source": "default"
+      },
+      "hash_extras": {
+        "value": false,
+        "source": "default"
+      },
+      "fail_on": {
+        "value": "error",
+        "source": "default"
+      },
+      "severity": {
+        "value": {},
+        "source": "default"
+      }
+    },
+    "manifests": [
+      {
+        "path": "set1.md5",
+        "format": "md5sum",
+        "entries": 1,
+        "stripped_prefix": null
+      }
+    ],
+    "cross_set": null
+  },
+  "causes": [
+    {
+      "code": "CAUSE_UNICODE_FORM",
+      "severity": "WARNING",
+      "summary": "1 file name differs from the manifest only in how accented letters are stored (one character, or a letter plus a separate accent mark). This typically happens when names made on macOS meet names made on Windows or Linux.",
+      "paths": [
+        "ShowA/Audio/Café_stem.wav"
+      ],
+      "note": "Probable cause, not a verdict."
+    }
+  ],
+  "findings": [
+    {
+      "code": "UNICODE_ONLY_MATCH",
+      "severity": "WARNING",
+      "path": "ShowA/Audio/Café_stem.wav",
+      "detail": "the manifest writes é as one character; the disk writes it as a letter plus a separate accent mark (typical of macOS). The names look identical but are stored differently.",
+      "manifest": null,
+      "line": null,
+      "expected_hash": null,
+      "actual_hash": null,
+      "size": null,
+      "proposed_name": null
+    }
+  ]
+}
