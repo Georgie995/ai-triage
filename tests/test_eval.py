@@ -88,6 +88,9 @@ def test_dry_run_is_free_and_never_touches_the_network(tmp_path, monkeypatch):
     summary = run(tmp_path, make_cases(tmp_path, REPORT, report(result="CLEAN")), dry_run=True)
     assert (summary.calls, summary.passed, summary.cost_usd) == (6, 6, 0)
     assert summary.mode == "dry-run"
+    # No AI was used, so no model may be credited with the result.
+    assert summary.model == "none (code fallback)"
+    assert "claude" not in (summary.folder / "summary.md").read_text(encoding="utf-8").lower()
 
 
 def test_dry_run_on_all_20_real_cases_passes_every_check(tmp_path):

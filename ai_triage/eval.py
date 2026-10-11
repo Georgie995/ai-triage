@@ -79,7 +79,9 @@ def run_eval(cases_dir, settings, repeats=3, sdk_client=None, dry_run=False, max
     client = None if dry_run else ClaudeClient(settings["model"], settings["effort"],
                                               settings["timeout_seconds"], sdk_client=sdk_client)
     folder, raw_path = _new_run_folder(Path(runs_dir))
-    summary = Summary(folder, "dry-run" if dry_run else "live", settings["model"], settings["effort"],
+    # In a dry run no AI is used, so no model is credited with the result.
+    model, effort = ("none (code fallback)", "n/a") if dry_run else (settings["model"], settings["effort"])
+    summary = Summary(folder, "dry-run" if dry_run else "live", model, effort,
                       len(cases), repeats, estimated, per_check={c: (0, 0) for c in CHECK_NAMES})
 
     with open(raw_path, "w", encoding="utf-8") as raw:
@@ -156,7 +158,8 @@ def _write_summary(s):
         f"# Harness run {s.folder.name}",
         "",
         f"- Mode: {s.mode}" + (" (code-written fallback, no AI)" if s.mode == "dry-run" else ""),
-        f"- Model: {s.model} · effort {s.effort} · prompt {PROMPT_VERSION}",
+        f"- Model: {s.model} · effort {s.effort} · prompt {PROMPT_VERSION}" if s.mode == "live"
+        else f"- Model: {s.model} · prompt {PROMPT_VERSION} (prompt not sent: no AI in a dry run)",
         f"- Cases × repeats: {s.cases} × {s.repeats} = {s.calls} calls",
         f"- **Pass rate: {s.pass_rate * 100:.1f}%** ({s.passed} of {s.calls} answers passed all 9 checks)",
         f"- No usable answer (API problem, refusal, broken reply): {s.api_failures}",

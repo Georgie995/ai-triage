@@ -1,2 +1,2 @@
 run,date,mode,model,effort,prompt_version,cases,repeats,calls,answered,passed,pass_rate,api_failures,input_tokens,output_tokens,cost_usd
-eval-2026-10-11_132912,2026-10-11T13:29:12+01:00,dry-run,claude-haiku-5-5,medium,p1,20,3,60,60,60,1.000,0,0,0,0.000000
+eval-2026-10-11_132944,2026-10-11T13:29:44+01:00,dry-run,none (code fallback),n/a,p1,20,3,60,60,60,1.000,0,0,0,0.000000

@@ -1,7 +1,7 @@
-# Harness run eval-2026-10-11_132912
+# Harness run eval-2026-10-11_132944
 
 - Mode: dry-run (code-written fallback, no AI)
-- Model: claude-haiku-5-5 · effort medium · prompt p1
+- Model: none (code fallback) · prompt p1 (prompt not sent: no AI in a dry run)
 - Cases × repeats: 20 × 3 = 60 calls
 - **Pass rate: 100.0%** (60 of 60 answers passed all 9 checks)
 - No usable answer (API problem, refusal, broken reply): 0
