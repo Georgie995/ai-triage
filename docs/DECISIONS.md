@@ -79,3 +79,9 @@ Each entry records the decision, the alternatives considered and why this one wa
 - **`--dry-run`:** uses the code-written fallback instead of the AI. It's free and offline, and checks that the cases and the harness work: 100% on all 20 cases.
 - **What's recorded:** every run is recorded in `runs/history.csv` (mode, model, effort, prompt version, pass rate, tokens, cost) and `runs/<run>/summary.md` (per check, per case, every failure with its reason). Raw answers go to `runs/raw/`, which is git-ignored.
 - **Noted for manifest-doctor (another repo):** its cross-set mismatch detail reads "the file matches line 1 of set1.md5, not line 1". It should name the second manifest ("…not line 1 of set2.md5").
+
+## 2026-10-11: Publish with dry-run results; live AI run pending
+
+- **Decision:** Georgi chose to publish without creating an Anthropic API key or spending money for now.
+- **What's in the repo:** the harness and checks are fully built and tested (stand-in model and the free dry-run). The committed run in `runs/` is a **dry-run**, which proves the cases and harness work; it says nothing about the AI.
+- **No AI pass rate is claimed** anywhere. The README states the live evaluation is pending, and running it later is one command (estimated at under $0.07 for 20 cases × 3).
