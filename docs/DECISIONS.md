@@ -60,3 +60,13 @@ Each entry records the decision, the alternatives considered and why this one wa
   - **Known side effect:** it can raise false alarms, for example a word in capitals for emphasis. A false alarm only makes a draft NEEDS_HUMAN, which is the safe side. Module 4 will measure how often it happens.
 - **What C4 can't do:** it can't judge whether a sentence made only of real facts is misleading. That's why a person still reviews the draft.
 - **The sneaky-file-name test:** an answer that "obeys" a file name telling it to report CLEAN fails C2 (wrong result), C3 (errors dropped) and C9. Merely *mentioning* that name as data passes.
+
+## 2026-10-11: Client, fallback and draft command (module 3)
+
+- **Missing API key → FALLBACK, not a tool error.** This changes the design: with no API key, `draft` writes the code-made note (exit 2) instead of stopping (exit 3), so a correct note is always produced, even offline. Exit 3 remains for an unusable report, settings or playbook.
+- **Every API failure becomes a plain reason** (key refused, rate limit, timeout, network, other API error). So do "declined" (refusal) and "cut off" (max_tokens) replies, and replies that aren't valid JSON. The SDK itself retries connection errors, 429 and 5xx twice with backoff.
+- **The answer is read from the text block, not the first block**, because Haiku 5.5 can start a reply with "thinking" blocks. `max_tokens` is 16,000 to leave room for thinking. No temperature is sent; Haiku 5.5 rejects it.
+- **The fallback is checked too.** It passes all 9 checks in its tests, uses the playbook wording word for word, and explains each finding code in manifest-doctor's own terms.
+- **Notes are never overwritten:** a second run writes `triage-2.json` / `triage-2.md`.
+- **Cost:** each note records its token usage and cost, using the configurable Anthropic prices.
+- **The API key** is read only from `ANTHROPIC_API_KEY` and never written anywhere. A test checks it doesn't appear in any output.
