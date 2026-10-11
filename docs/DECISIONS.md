@@ -51,3 +51,12 @@ Each entry records the decision, the alternatives considered and why this one wa
 - **Data tags:** the facts and playbook entries go to the model as JSON inside `<report_facts>` / `<playbook_entries>` tags. `<` and `>` inside the data are written as JSON escapes, so a file name like `</report_facts>` can't end the data section early (the information stays the same). A test proves it.
 - **Prompt version:** `p1`. Change it whenever the prompt or answer format changes.
 - **Noted for module 4:** a messy delivery can pick up many playbook entries (18 for the practice delivery). Whether to limit them is decided after seeing real drafts.
+
+## 2026-10-11: The checks (module 2)
+
+- **Our own format check (C1).** C1 uses a small validator of our own, even though the API also enforces the format: a draft is never trusted on the strength of the API's word alone. If the format is wrong, C2–C9 are reported as "not run" and count as failed.
+- **Severity changes in either direction fail (C5).** Making a WARNING an ERROR is also changing a fact. The message says whether it was softened or made more serious.
+- **C4 ("nothing invented") is deliberately strict.** Any number, capital-letter code, path or `name.ext` in the draft's text must appear in the fact sheet or the playbook entries. A small list of plain words (ERROR, CLEAN, …) and file names (report.json, …) is always allowed. Accented names are compared after Unicode normalisation, so Mac-style and Windows-style forms count as the same.
+  - **Known side effect:** it can raise false alarms, for example a word in capitals for emphasis. A false alarm only makes a draft NEEDS_HUMAN, which is the safe side. Module 4 will measure how often it happens.
+- **What C4 can't do:** it can't judge whether a sentence made only of real facts is misleading. That's why a person still reviews the draft.
+- **The sneaky-file-name test:** an answer that "obeys" a file name telling it to report CLEAN fails C2 (wrong result), C3 (errors dropped) and C9. Merely *mentioning* that name as data passes.
