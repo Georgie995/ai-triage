@@ -42,3 +42,12 @@ Each entry records the decision, the alternatives considered and why this one wa
 
 - **Decision:** at Georgi's request, each module ends with a very plain, non-technical explanation instead of a quiz. One interview-style quiz comes at the end, after publishing.
 - **Why:** he understands better that way. This replaces the per-module quiz described in the portfolio's working notes.
+
+## 2026-10-11: Facts and prompt details (module 1)
+
+- **Grouping:** findings are grouped by code with their *true* counts, ordered ERROR → WARNING → INFO and then biggest first. If one code has mixed severities (possible after profile overrides), the most serious is kept.
+- **Examples:** at most 10 example files per code are sent to the model (configurable default), with "not_shown". Counts are never trimmed.
+- **Manifest-line problems** are shown as "<manifest file name> line N", never with the manifest's full local path.
+- **Data tags:** the facts and playbook entries go to the model as JSON inside `<report_facts>` / `<playbook_entries>` tags. `<` and `>` inside the data are written as JSON escapes, so a file name like `</report_facts>` can't end the data section early (the information stays the same). A test proves it.
+- **Prompt version:** `p1`. Change it whenever the prompt or answer format changes.
+- **Noted for module 4:** a messy delivery can pick up many playbook entries (18 for the practice delivery). Whether to limit them is decided after seeing real drafts.

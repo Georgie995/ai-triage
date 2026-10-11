@@ -1,0 +1,15 @@
+[project]
+name = "ai-triage"
+version = "0.1.0"
+description = "Drafts a plain-English triage note from a manifest-doctor report with Claude, and checks every draft against the report."
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Georgi Stoyanov" }]
+dependencies = ["anthropic==1.13.0"]  # the official Anthropic SDK; the only network library used
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
