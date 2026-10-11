@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+# secrets and local settings: never commit
+.env
+*.secret
+ai-triage.toml
+# raw model replies from harness runs (summaries are committed separately)
+runs/raw/

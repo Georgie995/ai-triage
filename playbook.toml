@@ -1,0 +1,87 @@
+# Next-check playbook: what an operator should check next for each kind of problem.
+#
+# Drafted by Claude from Georgi's domain notes; reviewed and approved by Georgi on 2026-10-11. This is
+# his operational knowledge, not the AI's. Each entry has
+# a stable ID so the harness can verify the model only uses entries from this file.
+#
+# Keys are manifest-doctor finding codes (e.g. MISSING) and probable-cause codes (CAUSE_...).
+
+[MISSING]
+checks = [
+  { id = "MISSING-1", text = "Check whether the file exists at the source (camera card, vendor drive, tape or bucket)." },
+  { id = "MISSING-2", text = "Check the copy or transfer log for errors or skipped files." },
+  { id = "MISSING-3", text = "Re-copy only the missing files, then verify again." },
+]
+
+[EXTRA]
+checks = [
+  { id = "EXTRA-1", text = "Check whether the extra files belong to this delivery or were left over from another job." },
+  { id = "EXTRA-2", text = "If they might be renamed versions of expected files, re-run with --hash-extras and compare checksums." },
+]
+
+[HASH_MISMATCH]
+checks = [
+  { id = "MISMATCH-1", text = "Re-copy the file from the source and verify again." },
+  { id = "MISMATCH-2", text = "If it still differs, checksum the source copy to see whether the source changed after the manifest was made." },
+]
+
+[ZERO_BYTE]
+checks = [
+  { id = "ZERO-1", text = "Check the file's size at the source. If it is also empty there, raise it with the supplier before re-copying." },
+]
+
+[DUPLICATE_ENTRY]
+checks = [
+  { id = "DUP-1", text = "Ask the sender which version is intended." },
+  { id = "DUP-2", text = "Do not overwrite or delete either version until that is confirmed." },
+  { id = "DUP-3", text = "If both versions are needed, re-deliver the newer one under a non-clashing name, with a note explaining why." },
+]
+
+[CROSS_SET_CONFLICT]
+checks = [
+  { id = "CONFLICT-1", text = "Compare the size and date of each version, then confirm with the owner which one is correct." },
+]
+
+[UNREADABLE]
+checks = [
+  { id = "UNREAD-1", text = "Check the permissions on the file or folder and fix them in a controlled way." },
+  { id = "UNREAD-2", text = "If it is a read error on media (tape or drive), try reading it on another drive and note which files are affected." },
+]
+
+[MANIFEST_LINE_UNREADABLE]
+checks = [
+  { id = "MANLINE-1", text = "Open the manifest at the reported line, and ask the sender for a corrected manifest." },
+]
+
+[NAME_HYGIENE]
+checks = [
+  { id = "NAME-1", text = "Review the proposed clean names and rename in a controlled step, keeping a record of old and new names." },
+]
+
+[ABSOLUTE_PATHS_DETECTED]
+checks = [
+  { id = "ABS-1", text = "Re-run with the --strip-prefix that manifest-doctor suggests." },
+]
+
+[CAUSE_WRAPPER_FOLDER]
+checks = [
+  { id = "WRAP-1", text = "Confirm the expected top-level folder structure with the recipient." },
+  { id = "WRAP-2", text = "Either deliver without the extra folder, or re-run with --strip-prefix if the folder is expected." },
+]
+
+[CAUSE_UNICODE_FORM]
+checks = [
+  { id = "UNICODE-1", text = "Check which system created the names (often macOS) and whether the recipient's system will match them." },
+  { id = "UNICODE-2", text = "If needed, rename in a controlled step with a record of old and new names." },
+]
+
+[CAUSE_CASE_ONLY]
+checks = [
+  { id = "CASE-1", text = "Confirm whether the recipient's storage treats upper and lower case as different (cloud storage and Linux usually do)." },
+  { id = "CASE-2", text = "If it does, rename to match the manifest in a controlled step." },
+]
+
+[CAUSE_HIDDEN_NOISE]
+checks = [
+  { id = "HIDDEN-1", text = "Remove system files such as .DS_Store from the delivery before sending, unless the recipient wants them." },
+]
