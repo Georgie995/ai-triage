@@ -1,0 +1,9 @@
+# Copy to ai-triage.toml to change settings (optional; ai-triage.toml is git-ignored).
+# The API key is never a setting: set the environment variable ANTHROPIC_API_KEY.
+
+model = "claude-haiku-5-5"
+effort = "medium"                   # low | medium | high | xhigh | max
+timeout_seconds = 60
+price_input_per_mtok_usd = 0.10     # Anthropic's published Haiku 5.5 rate (prompts up to 100K tokens)
+price_output_per_mtok_usd = 0.50
+max_run_cost_usd = 0.30             # the harness refuses to start above this estimated cost
