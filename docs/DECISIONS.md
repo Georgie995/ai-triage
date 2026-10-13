@@ -85,3 +85,10 @@ Each entry records the decision, the alternatives considered and why this one wa
 - **Decision:** Georgi chose to publish without creating an Anthropic API key or spending money for now.
 - **What's in the repo:** the harness and checks are fully built and tested (stand-in model and the free dry-run). The committed run in `runs/` is a **dry-run**, which proves the cases and harness work; it says nothing about the AI.
 - **No AI pass rate is claimed** anywhere. The README states the live evaluation is pending, and running it later is one command (estimated at under $0.07 for 20 cases × 3).
+
+## 2026-10-13: The README now says what C4 can't catch
+
+- **Found by:** an outside review of the repo. "Nothing invented" read as if it caught any invented content.
+- **What C4 actually does:** it looks for identifiers (finding codes, numbers in digits, words in capitals, paths, file names) that aren't in the report or playbook.
+- **Tried and confirmed:** "7 files are missing" fails C4, but "Seven files are missing" and "probably caused by a faulty cable" both pass it.
+- **Decision:** no code change. Catching invented reasoning in ordinary words would need judgement, not a pattern, and that is the person reviewing the draft. The README's check table and *Known limits* now say this plainly.

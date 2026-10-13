@@ -41,7 +41,7 @@ python -m ai_triage draft <report folder>
 | C1 | Format | the draft isn't in the required JSON shape (our own validator, not just the API's) |
 | C2 | Same result | the draft's result differs from the report |
 | C3 | Nothing critical dropped | any ERROR finding is missing |
-| C4 | Nothing invented | a code, number, path or file name appears that isn't in the report or playbook |
+| C4 | Nothing invented | a finding code, a number in digits, a word in capitals, a path or a file name appears that isn't in the report or playbook (identifiers only: see *Known limits*) |
 | C5 | No changed severity | a finding is made less (or more) serious |
 | C6 | Counts match | any count differs |
 | C7 | Order | findings aren't ordered ERROR → WARNING → INFO |
@@ -136,7 +136,8 @@ Settings (optional, `ai-triage.toml`, see `ai-triage.example.toml`):
 ## Known limits
 
 - **No live AI pass rate yet** (see Status).
-- **C4 is strict on purpose.** It catches invented facts but can raise false alarms, for example a word in capitals for emphasis. A false alarm only makes a draft NEEDS HUMAN.
+- **C4 catches invented identifiers, not invented reasoning.** It looks for codes, numbers in digits, words in capitals, paths and file names that aren't in the report or playbook. It does not catch a made-up cause in ordinary words ("probably a faulty cable") or a number written as a word ("seven files"); both were tried, and both pass C4. That's one more reason a person reviews every draft.
+- **C4 is also strict on purpose,** so it can raise false alarms, for example a word in capitals for emphasis. A false alarm only makes a draft NEEDS HUMAN.
 - **No check can judge whether a sentence made of real facts is misleading.** That's why a person reviews every draft.
 - **The pass rate covers 20 synthetic cases.** It's evidence, not a guarantee for real reports.
 - **Tested on Windows 11 only,** with Python 3.13.
