@@ -92,3 +92,15 @@ Each entry records the decision, the alternatives considered and why this one wa
 - **What C4 actually does:** it looks for identifiers (finding codes, numbers in digits, words in capitals, paths, file names) that aren't in the report or playbook.
 - **Tried and confirmed:** "7 files are missing" fails C4, but "Seven files are missing" and "probably caused by a faulty cable" both pass it.
 - **Decision:** no code change. Catching invented reasoning in ordinary words would need judgement, not a pattern, and that is the person reviewing the draft. The README's check table and *Known limits* now say this plainly.
+
+## 2026-10-20: Tests run on GitHub after every push, and every Monday
+
+- **Need:** Georgi asked which automations would genuinely improve the published tools (research in his private notes). This repo had no automatic tests on GitHub, although every other project's rules ask for them.
+- **Options:** (a) leave as is; (b) run the tests on GitHub's Linux and Windows machines (Python 3.11 and 3.13).
+- **Decision (Georgi, 2026-10-20):** (b). GitHub's machine installs the same Anthropic library version as `pyproject.toml`.
+  - **Every Monday at 06:00 UTC** the tests run again even if nothing was pushed, so a new Python version or a change in a sibling repo is noticed without anyone looking.
+  - **Safety:** read-only permissions, no secrets (so no AI call is possible), and only GitHub's own official actions.
+- **Known limits:**
+  - GitHub pauses scheduled runs in a repo with no activity for 60 days.
+  - **No live AI run happens on GitHub.** There's no key, and the tests use fake replies. The live evaluation is still pending.
+- **Tested by:** before pushing, each suite was run from fresh local clones laid out exactly as the workflow lays them out. A checker confirmed every workflow file follows the rules above, and each rule was broken on purpose once (write permission, no Monday run, a secret, a non-GitHub action, a wrong or missing sibling, the wrong machines); the checker caught every break. The workflow itself can only be fully proven on GitHub, by the first run after pushing.

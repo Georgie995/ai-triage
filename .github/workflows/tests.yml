@@ -1,0 +1,30 @@
+# Runs the tests on GitHub's own Linux and Windows machines after every push, and every Monday
+# even if nothing was pushed (so a new Python is noticed).
+# No API key exists here, so no AI call can be made: every test uses fake replies.
+name: tests
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"   # Mondays 06:00 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      # The exact Anthropic library version from pyproject.toml, plus pytest.
+      - run: python -m pip install "anthropic==1.13.0" pytest
+      - run: python -m pytest -q -rs

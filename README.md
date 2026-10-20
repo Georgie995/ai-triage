@@ -1,5 +1,7 @@
 # ai-triage
 
+[![tests](https://github.com/Georgie995/ai-triage/actions/workflows/tests.yml/badge.svg)](https://github.com/Georgie995/ai-triage/actions/workflows/tests.yml) *Tests run on Linux and Windows after every change, and every Monday.*
+
 Uses an AI (Claude) to draft a plain-English note about a file-delivery verification report, then **checks every draft against the report** before anyone relies on it. It also includes a test bench that measures how often the AI gets everything right.
 
 Built on [manifest-doctor](https://github.com/Georgie995/manifest-doctor) reports.
